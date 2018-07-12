@@ -1,0 +1,981 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Aplicación de Consultas</title>
+  <link rel="stylesheet" href="https://js.arcgis.com/3.23/esri/themes/calcite/dijit/calcite.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/3.23/esri/css/esri.css">
+  <link rel="stylesheet" href="css/styles.css" type="text/css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rammetto+One">
+  <script src="https://js.arcgis.com/3.23/"></script>
+  <script src="js/script.js" type="text/javascript"></script>
+</head>
+
+<div class="contenedor">
+  <div class="contTitulo">
+    <div class="titulo">PropertFy</div>
+  </div>
+  <div class="barraIzq">
+    <button title="Realiza una consulta" class="botonesIzq" id="btnConsultas"><img class="imgIconos" src="images\lupa.png"></button>
+    <button title="Descubre lo que hay a tu alrededor" class="botonesIzq" id="btnServiceAreas"><img class="imgIconos" src="images\mapmarker.png"></button>
+    <button title="Calcula tu hipoteca" class="botonesIzq" id="btnHipotecas"><img class="imgIconos" src="images\bankdollar.png"></button>
+    <button title="Analiza las estadísticas" class="botonesIzq" id="btnEstadisticas"><img class="imgIconos" src="images\graphs.png"></button>
+  </div>
+  <div class="menu" id="menuConsultas">
+    <div class="cabeceraMenu">Realiza tu Consulta
+      <div title="Cerrar" class="btnCerrarVentana" id="btnCerrarVentana"><img class="imgCerrarVentana" src="images\delete.png"></div>
+    </div>
+    <div class="contFiltros">
+      <fieldset id="TipoTransaccion">
+        <legend>Tipo de transacción</legend>
+        <div class="bloqueBotones">
+          <label class="labelTransaccion" id="labelComprar"><input type="radio" class="radiobtn" name="transaccion" id="comprar" checked>Comprar</label>
+          <label class="labelTransaccion" id="labelAlquilar"><input type="radio" class="radiobtn" name="transaccion" id="alquilar">Alquilar</label>
+        </div>
+      </fieldset>
+      <fieldset id="TipoInmueble">
+        <legend>Tipo de inmueble</legend>
+        <div class="bloqueBotones">
+          <label class="labelTipoInmueble" id="labelViviendas"><input type="radio" class="radiobtn" name="inmueble" id="viviendas" checked>Viviendas</label>
+          <label class="labelTipoInmueble" id="labelHabitaciones"><input type="radio" class="radiobtn" name="inmueble" id="habitaciones">Habitaciones</label>
+          <label class="labelTipoInmueble" id="labelOficinas"><input type="radio" class="radiobtn" name="inmueble" id="oficinas">Oficinas</label>
+          <label class="labelTipoInmueble" id="labelLocales"><input type="radio" class="radiobtn" name="inmueble" id="locales">Locales o naves</label>
+          <label class="labelTipoInmueble" id="labelTerrenos"><input type="radio" class="radiobtn" name="inmueble" id="terrenos">Terrenos</label>
+          <label class="labelTipoInmueble" id="labelTrasteros"><input type="radio" class="radiobtn" name="inmueble" id="trasteros">Trasteros</label>
+          <label class="labelTipoInmueble" id="labelGarajes"><input type="radio" class="radiobtn" name="inmueble" id="garajes">Garajes</label>
+      </fieldset>
+      <fieldset id="SubTipoViviendas">
+        <legend>Tipo de vivienda</legend>
+        <div class="btn-group">
+          <input type="checkbox" class="cajaCheck" id="subtipoVivienda1" value="1">
+          <button class="botonCheck" id="btnPiso">Piso</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoVivienda2" value="2">
+          <button class="botonCheck" id="btnChalet">Chalet</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoVivienda3" value="3">
+          <button class="botonCheck" id="btnCasa">Casa adosada</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoVivienda4" value="4">
+          <button class="botonCheck" id="btnDuplex">Dúplex</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoVivienda5" value="5">
+          <button class="botonCheck" id="btnAtico">Ático</button>
+        </div>
+      </fieldset>
+      <fieldset id="SubTipoLocales">
+        <legend>Tipo de local</legend>
+        <div class="btn-group">
+          <input type="checkbox" class="cajaCheck" id="subtipoLocal1" value="1">
+          <button class="botonCheck" id="btnLocal">Local Comercial</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoLocal2" value="2">
+          <button class="botonCheck" id="btnNave">Nave industrial</button>
+        </div>
+      </fieldset>
+      <fieldset id="SubTipoTerrenos">
+        <legend>Tipo de terreno</legend>
+        <div class="btn-group">
+          <input type="checkbox" class="cajaCheck" id="subtipoTerreno1" value="1">
+          <button class="botonCheck" id="btnUrbano">Urbano</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoTerreno2" value="2">
+          <button class="botonCheck" id="btnRural">Rural</button>
+        </div>
+      </fieldset>
+      <fieldset id="PrecioInmuebles">
+        <legend>Precio</legend>
+        <select class="precio-venta-viviendas" id="precio-venta-viviendas-desde">
+            <option value="0">Precio desde</option>
+            <option value="30000">Desde 25.000€</option>
+            <option value="50000">Desde 50.000€</option>
+            <option value="75000">Desde 75.000€</option>
+            <option value="100000">Desde 100.000€</option>
+            <option value="125000">Desde 125.000€</option>
+            <option value="150000">Desde 150.000€</option>
+            <option value="175000">Desde 175.000€</option>
+            <option value="200000">Desde 200.000€</option>
+            <option value="225000">Desde 225.000€</option>
+            <option value="250000">Desde 250.000€</option>
+            <option value="275000">Desde 275.000€</option>
+            <option value="300000">Desde 300.000€</option>
+            <option value="325000">Desde 325.000€</option>
+            <option value="350000">Desde 350.000€</option>
+            <option value="375000">Desde 375.000€</option>
+            <option value="400000">Desde 400.000€</option>
+            <option value="425000">Desde 425.000€</option>
+            <option value="450000">Desde 450.000€</option>
+            <option value="475000">Desde 475.000€</option>
+            <option value="500000">Desde 500.000€</option>
+            <option value="550000">Desde 550.000€</option>
+            <option value="600000">Desde 600.000€</option>
+            <option value="750000">Desde 750.000€</option>
+            <option value="800000">Desde 800.000€</option>
+            <option value="850000">Desde 850.000€</option>
+            <option value="900000">Desde 900.000€</option>
+            <option value="950000">Desde 950.000€</option>
+            <option value="1000000">Desde 1.000.000€</option>
+            <option value="1100000">Desde 1.100.000€</option>
+            <option value="1200000">Desde 1.200.000€</option>
+            <option value="1300000">Desde 1.300.000€</option>
+            <option value="1400000">Desde 1.400.000€</option>
+            <option value="1500000">Desde 1.500.000€</option>
+            <option value="1600000">Desde 1.600.000€</option>
+            <option value="1700000">Desde 1.700.000€</option>
+            <option value="1800000">Desde 1.800.000€</option>
+            <option value="1900000">Desde 1.900.000€</option>
+            <option value="2000000">Desde 2.000.000€</option>
+            <option value="2250000">Desde 2.250.000€</option>
+            <option value="2500000">Desde 2.500.000€</option>
+            <option value="2750000">Desde 2.750.000€</option>
+            <option value="3000000">Desde 3.000.000€</option>
+            <option value="3500000">Desde 3.500.000€</option>
+            <option value="4000000">Desde 4.000.000€</option>
+          </select>
+        <select class="precio-venta-viviendas" id="precio-venta-viviendas-hasta">
+            <option value="0">Precio hasta</option>
+            <option value="50000">Hasta 30.000€</option>
+            <option value="50000">Hasta 50.000€</option>
+            <option value="75000">Hasta 75.000€</option>
+            <option value="100000">Hasta 100.000€</option>
+            <option value="125000">Hasta 125.000€</option>
+            <option value="150000">Hasta 150.000€</option>
+            <option value="175000">Hasta 175.000€</option>
+            <option value="200000">Hasta 200.000€</option>
+            <option value="225000">Hasta 225.000€</option>
+            <option value="250000">Hasta 250.000€</option>
+            <option value="275000">Hasta 275.000€</option>
+            <option value="300000">Hasta 300.000€</option>
+            <option value="325000">Hasta 325.000€</option>
+            <option value="350000">Hasta 350.000€</option>
+            <option value="375000">Hasta 375.000€</option>
+            <option value="400000">Hasta 400.000€</option>
+            <option value="425000">Hasta 425.000€</option>
+            <option value="450000">Hasta 450.000€</option>
+            <option value="475000">Hasta 475.000€</option>
+            <option value="500000">Hasta 500.000€</option>
+            <option value="550000">Hasta 550.000€</option>
+            <option value="600000">Hasta 600.000€</option>
+            <option value="750000">Hasta 750.000€</option>
+            <option value="800000">Hasta 800.000€</option>
+            <option value="850000">Hasta 850.000€</option>
+            <option value="900000">Hasta 900.000€</option>
+            <option value="950000">Hasta 950.000€</option>
+            <option value="1000000">Desde 1.000.000€</option>
+            <option value="1100000">Hasta 1.100.000€</option>
+            <option value="1200000">Hasta 1.200.000€</option>
+            <option value="1300000">Hasta 1.300.000€</option>
+            <option value="1400000">Hasta 1.400.000€</option>
+            <option value="1500000">Hasta 1.500.000€</option>
+            <option value="1600000">Hasta 1.600.000€</option>
+            <option value="1700000">Hasta 1.700.000€</option>
+            <option value="1800000">Hasta 1.800.000€</option>
+            <option value="1900000">Hasta 1.900.000€</option>
+            <option value="2000000">Hasta 2.000.000€</option>
+            <option value="2250000">Hasta 2.250.000€</option>
+            <option value="2500000">Hasta 2.500.000€</option>
+            <option value="2750000">Hasta 2.750.000€</option>
+            <option value="3000000">Hasta 3.000.000€</option>
+            <option value="3500000">Hasta 3.500.000€</option>
+            <option value="4000000">Hasta 4.000.000€</option>
+            <option value="5000000">Hasta 5.000.000€</option>
+            <option value="10000000">Hasta 10.000.000€</option>
+          </select>
+        <select class="precio-alquiler-viviendas" id="precio-alquiler-viviendas-desde">
+            <option value="0">Precio desde</option>
+            <option value="100">Desde 100€/mes</option>
+            <option value="150">Desde 150€/mes</option>
+            <option value="200">Desde 200€/mes</option>
+            <option value="250">Desde 250€/mes</option>
+            <option value="300">Desde 300€/mes</option>
+            <option value="350">Desde 350€/mes</option>
+            <option value="400">Desde 400€/mes</option>
+            <option value="450">Desde 450€/mes</option>
+            <option value="500">Desde 500€/mes</option>
+            <option value="550">Desde 550€/mes</option>
+            <option value="600">Desde 600€/mes</option>
+            <option value="650">Desde 650€/mes</option>
+            <option value="700">Desde 700€/mes</option>
+            <option value="750">Desde 750€/mes</option>
+            <option value="800">Desde 800€/mes</option>
+            <option value="850">Desde 850€/mes</option>
+            <option value="900">Desde 900€/mes</option>
+            <option value="950">Desde 950€/mes</option>
+            <option value="1000">Desde 1000€/mes</option>
+            <option value="1100">Desde 1100€/mes</option>
+            <option value="1200">Desde 1200€/mes</option>
+            <option value="1300">Desde 1300€/mes</option>
+            <option value="1400">Desde 1400€/mes</option>
+            <option value="1500">Desde 1500€/mes</option>
+            <option value="1600">Desde 1600€/mes</option>
+            <option value="1700">Desde 1700€/mes</option>
+            <option value="1800">Desde 1800€/mes</option>
+            <option value="1900">Desde 1900€/mes</option>
+            <option value="2000">Desde 2000€/mes</option>
+            <option value="2250">Desde 2250€/mes</option>
+            <option value="2500">Desde 2500€/mes</option>
+            <option value="2750">Desde 2750€/mes</option>
+            <option value="3000">Desde 3000€/mes</option>
+            <option value="3500">Desde 3500€/mes</option>
+            <option value="4000">Desde 4000€/mes</option>
+            <option value="4500">Desde 4500€/mes</option>
+            <option value="5000">Desde 5000€/mes</option>
+            <option value="6000">Desde 6000€/mes</option>
+            <option value="7000">Desde 7000€/mes</option>
+            <option value="8000">Desde 8000€/mes</option>
+          </select>
+        <select class="precio-alquiler-viviendas" id="precio-alquiler-viviendas-hasta">
+            <option value="0">Precio hasta</option>
+            <option value="100">Hasta 100€/mes</option>
+            <option value="150">Hasta 150€/mes</option>
+            <option value="200">Hasta 200€/mes</option>
+            <option value="250">Hasta 250€/mes</option>
+            <option value="300">Hasta 300€/mes</option>
+            <option value="350">Hasta 350€/mes</option>
+            <option value="400">Hasta 400€/mes</option>
+            <option value="450">Hasta 450€/mes</option>
+            <option value="500">Hasta 500€/mes</option>
+            <option value="550">Hasta 550€/mes</option>
+            <option value="600">Hasta 600€/mes</option>
+            <option value="650">Hasta 650€/mes</option>
+            <option value="700">Hasta 700€/mes</option>
+            <option value="750">Hasta 750€/mes</option>
+            <option value="800">Hasta 800€/mes</option>
+            <option value="850">Hasta 850€/mes</option>
+            <option value="900">Hasta 900€/mes</option>
+            <option value="950">Hasta 950€/mes</option>
+            <option value="1000">Hasta 1000€/mes</option>
+            <option value="1100">Hasta 1100€/mes</option>
+            <option value="1200">Hasta 1200€/mes</option>
+            <option value="1300">Hasta 1300€/mes</option>
+            <option value="1400">Hasta 1400€/mes</option>
+            <option value="1500">Hasta 1500€/mes</option>
+            <option value="1600">Hasta 1600€/mes</option>
+            <option value="1700">Hasta 1700€/mes</option>
+            <option value="1800">Hasta 1800€/mes</option>
+            <option value="1900">Hasta 1900€/mes</option>
+            <option value="2000">Hasta 2000€/mes</option>
+            <option value="2250">Hasta 2250€/mes</option>
+            <option value="2500">Hasta 2500€/mes</option>
+            <option value="2750">Hasta 2750€/mes</option>
+            <option value="3000">Hasta 3000€/mes</option>
+            <option value="3500">Hasta 3500€/mes</option>
+            <option value="4000">Hasta 4000€/mes</option>
+            <option value="4500">Hasta 4500€/mes</option>
+            <option value="5000">Hasta 5000€/mes</option>
+            <option value="6000">Hasta 6000€/mes</option>
+            <option value="7000">Hasta 7000€/mes</option>
+            <option value="8000">Hasta 8000€/mes</option>
+            <option value="9000">Hasta 9000€/mes</option>
+          </select>
+        <select class="precio-alquiler-habitaciones" id="precio-alquiler-habitaciones-desde">
+              <option value="0">Precio desde</option>
+              <option value="100">Desde 100€/mes</option>
+              <option value="125">Desde 125€/mes</option>
+              <option value="150">Desde 150€/mes</option>
+              <option value="175">Desde 175€/mes</option>
+              <option value="200">Desde 200€/mes</option>
+              <option value="225">Desde 225€/mes</option>
+              <option value="250">Desde 250€/mes</option>
+              <option value="275">Desde 275€/mes</option>
+              <option value="300">Desde 300€/mes</option>
+              <option value="325">Desde 325€/mes</option>
+              <option value="350">Desde 350€/mes</option>
+              <option value="375">Desde 375€/mes</option>
+              <option value="400">Desde 400€/mes</option>
+              <option value="425">Desde 425€/mes</option>
+              <option value="450">Desde 450€/mes</option>
+              <option value="475">Desde 475€/mes</option>
+              <option value="500">Desde 500€/mes</option>
+              <option value="550">Desde 550€/mes</option>
+              <option value="600">Desde 600€/mes</option>
+            </select>
+        <select class="precio-alquiler-habitaciones" id="precio-alquiler-habitaciones-hasta">
+              <option value="0">Precio hasta</option>
+              <option value="100">Desde 100€/mes</option>
+              <option value="125">Desde 125€/mes</option>
+              <option value="150">Desde 150€/mes</option>
+              <option value="175">Desde 175€/mes</option>
+              <option value="200">Desde 200€/mes</option>
+              <option value="225">Desde 225€/mes</option>
+              <option value="250">Desde 250€/mes</option>
+              <option value="275">Desde 275€/mes</option>
+              <option value="300">Desde 300€/mes</option>
+              <option value="325">Desde 325€/mes</option>
+              <option value="350">Desde 350€/mes</option>
+              <option value="375">Desde 375€/mes</option>
+              <option value="400">Desde 400€/mes</option>
+              <option value="425">Desde 425€/mes</option>
+              <option value="450">Desde 450€/mes</option>
+              <option value="475">Desde 475€/mes</option>
+              <option value="500">Desde 500€/mes</option>
+              <option value="550">Desde 550€/mes</option>
+              <option value="600">Desde 600€/mes</option>
+            </select>
+        <select class="precio-venta-oficinas" id="precio-venta-oficinas-desde">
+            <option value="0">Precio desde</option>
+            <option value="50000">Desde 50.000€</option>
+            <option value="100000">Desde 100.000€</option>
+            <option value="150000">Desde 150.000€</option>
+            <option value="200000">Desde 200.000€</option>
+            <option value="250000">Desde 250.000€</option>
+            <option value="300000">Desde 300.000€</option>
+            <option value="350000">Desde 350.000€</option>
+            <option value="400000">Desde 400.000€</option>
+            <option value="450000">Desde 450.000€</option>
+            <option value="500000">Desde 500.000€</option>
+            <option value="550000">Desde 550.000€</option>
+            <option value="600000">Desde 600.000€</option>
+            <option value="1000000">Desde 1.000.000€</option>
+            <option value="1500000">Desde 1.500.000€</option>
+            <option value="2000000">Desde 2.000.000€</option>
+            <option value="5000000">Desde 5.000.000€</option>
+            <option value="10000000">Desde 10.000.000€</option>
+          </select>
+        <select class="precio-venta-oficinas" id="precio-venta-oficinas-hasta">
+            <option value="0">Precio hasta</option>
+            <option value="50000">Hasta 50.000€</option>
+            <option value="100000">Hasta 100.000€</option>
+            <option value="150000">Hasta 150.000€</option>
+            <option value="200000">Hasta 200.000€</option>
+            <option value="250000">Hasta 250.000€</option>
+            <option value="300000">Hasta 300.000€</option>
+            <option value="350000">Hasta 350.000€</option>
+            <option value="400000">Hasta 400.000€</option>
+            <option value="450000">Hasta 450.000€</option>
+            <option value="500000">Hasta 500.000€</option>
+            <option value="550000">Hasta 550.000€</option>
+            <option value="600000">Hasta 600.000€</option>
+            <option value="1000000">Hasta 1.000.000€</option>
+            <option value="1500000">Hasta 1.500.000€</option>
+            <option value="2000000">Hasta 2.000.000€</option>
+            <option value="5000000">Hasta 5.000.000€</option>
+            <option value="10000000">Hasta 10.000.000€</option>
+          </select>
+        <select class="precio-alquiler-oficinas" id="precio-alquiler-oficinas-desde">
+            <option value="0">Precio desde</option>
+            <option value="100">Desde 100€/mes</option>
+            <option value="300">Desde 300€/mes</option>
+            <option value="600">Desde 600€/mes</option>
+            <option value="900">Desde 900€/mes</option>
+            <option value="1200">Desde 1.200€/mes</option>
+            <option value="1500">Desde 1.500€/mes</option>
+            <option value="1800">Desde 1.800€/mes</option>
+            <option value="2100">Desde 2.100€/mes</option>
+            <option value="2400">Desde 2.400€/mes</option>
+            <option value="2700">Desde 2.700€/mes</option>
+            <option value="3000">Desde 3.000€/mes</option>
+            <option value="3300">Desde 3.300€/mes</option>
+            <option value="3600">Desde 3.600€/mes</option>
+            <option value="3900">Desde 3.900€/mes</option>
+            <option value="4200">Desde 4.200€/mes</option>
+            <option value="4500">Desde 4.500€/mes</option>
+            <option value="4800">Desde 4.800€/mes</option>
+            <option value="5100">Desde 5.100€/mes</option>
+            <option value="5400">Desde 5.400€/mes</option>
+            <option value="5700">Desde 5.700€/mes</option>
+            <option value="6000">Desde 6.000€/mes</option>
+            <option value="10000">Desde 10.000€/mes</option>
+          </select>
+        <select class="precio-alquiler-oficinas" id="precio-alquiler-oficinas-hasta">
+            <option value="0">Precio hasta</option>
+            <option value="100">Hasta 100€/mes</option>
+            <option value="300">Hasta 300€/mes</option>
+            <option value="600">Hasta 600€/mes</option>
+            <option value="900">Hasta 900€/mes</option>
+            <option value="1200">Hasta 1.200€/mes</option>
+            <option value="1500">Hasta 1.500€/mes</option>
+            <option value="1800">Hasta 1.800€/mes</option>
+            <option value="2100">Hasta 2.100€/mes</option>
+            <option value="2400">Hasta 2.400€/mes</option>
+            <option value="2700">Hasta 2.700€/mes</option>
+            <option value="3000">Hasta 3.000€/mes</option>
+            <option value="3300">Hasta 3.300€/mes</option>
+            <option value="3600">Hasta 3.600€/mes</option>
+            <option value="3900">Hasta 3.900€/mes</option>
+            <option value="4200">Hasta 4.200€/mes</option>
+            <option value="4500">Hasta 4.500€/mes</option>
+            <option value="4800">Hasta 4.800€/mes</option>
+            <option value="5100">Hasta 5.100€/mes</option>
+            <option value="5400">Hasta 5.400€/mes</option>
+            <option value="5700">Hasta 5.700€/mes</option>
+            <option value="6000">Hasta 6.000€/mes</option>
+            <option value="10000">Hasta 10.000€/mes</option>
+            <option value="10000">Hasta 50.000€/mes</option>
+          </select>
+        <select class="precio-venta-locales" id="precio-venta-locales-desde">
+            <option value="0">Precio desde</option>
+            <option value="10000">Desde 10.000€</option>
+            <option value="20000">Desde 20.000€</option>
+            <option value="50000">Desde 50.000€</option>
+            <option value="100000">Desde 100.000€</option>
+            <option value="150000">Desde 150.000€</option>
+            <option value="200000">Desde 200.000€</option>
+            <option value="250000">Desde 250.000€</option>
+            <option value="300000">Desde 300.000€</option>
+            <option value="350000">Desde 350.000€</option>
+            <option value="400000">Desde 400.000€</option>
+            <option value="450000">Desde 450.000€</option>
+            <option value="500000">Desde 500.000€</option>
+            <option value="550000">Desde 550.000€</option>
+            <option value="600000">Desde 600.000€</option>
+            <option value="1200000">Desde 1.200.000€</option>
+            <option value="1500000">Desde 1.500.000€</option>
+            <option value="2000000">Desde 2.000.000€</option>
+            <option value="5000000">Desde 5.000.000€</option>
+          </select>
+        <select class="precio-venta-locales" id="precio-venta-locales-hasta">
+            <option value="0">Precio hasta</option>
+            <option value="20000">Hasta 20.000€</option>
+            <option value="50000">Hasta 50.000€</option>
+            <option value="100000">Hasta 100.000€</option>
+            <option value="150000">Hasta 150.000€</option>
+            <option value="200000">Hasta 200.000€</option>
+            <option value="250000">Hasta 250.000€</option>
+            <option value="300000">Hasta 300.000€</option>
+            <option value="350000">Hasta 350.000€</option>
+            <option value="400000">Hasta 400.000€</option>
+            <option value="450000">Hasta 450.000€</option>
+            <option value="500000">Hasta 500.000€</option>
+            <option value="550000">Hasta 550.000€</option>
+            <option value="600000">Hasta 600.000€</option>
+            <option value="1200000">Hasta 1.200.000€</option>
+            <option value="1500000">Hasta 1.500.000€</option>
+            <option value="2000000">Hasta 2.000.000€</option>
+            <option value="5000000">Hasta 5.000.000€</option>
+          </select>
+        <select class="precio-alquiler-locales" id="precio-alquiler-locales-desde">
+            <option value="0">Precio desde</option>
+            <option value="300">Desde 300€/mes</option>
+            <option value="600">Desde 600€/mes</option>
+            <option value="900">Desde 900€/mes</option>
+            <option value="1200">Desde 1.200€/mes</option>
+            <option value="1500">Desde 1.500€/mes</option>
+            <option value="1800">Desde 1.800€/mes</option>
+            <option value="2100">Desde 2.100€/mes</option>
+            <option value="2400">Desde 2.400€/mes</option>
+            <option value="2700">Desde 2.700€/mes</option>
+            <option value="3000">Desde 3.000€/mes</option>
+            <option value="3300">Desde 3.300€/mes</option>
+            <option value="3600">Desde 3.600€/mes</option>
+            <option value="3900">Desde 3.900€/mes</option>
+            <option value="4200">Desde 4.200€/mes</option>
+            <option value="4500">Desde 4.500€/mes</option>
+            <option value="4800">Desde 4.800€/mes</option>
+            <option value="5100">Desde 5.100€/mes</option>
+            <option value="5400">Desde 5.400€/mes</option>
+            <option value="5700">Desde 5.700€/mes</option>
+            <option value="6000">Desde 6.000€/mes</option>
+            <option value="10000">Desde 10.000€/mes</option>
+          </select>
+        <select class="precio-alquiler-locales" id="precio-alquiler-locales-hasta">
+            <option value="0">Precio hasta</option>
+            <option value="300">Hasta 300€/mes</option>
+            <option value="600">Hasta 600€/mes</option>
+            <option value="900">Hasta 900€/mes</option>
+            <option value="1200">Hasta 1.200€/mes</option>
+            <option value="1500">Hasta 1.500€/mes</option>
+            <option value="1800">Hasta 1.800€/mes</option>
+            <option value="2100">Hasta 2.100€/mes</option>
+            <option value="2400">Hasta 2.400€/mes</option>
+            <option value="2700">Hasta 2.700€/mes</option>
+            <option value="3000">Hasta 3.000€/mes</option>
+            <option value="3300">Hasta 3.300€/mes</option>
+            <option value="3600">Hasta 3.600€/mes</option>
+            <option value="3900">Hasta 3.900€/mes</option>
+            <option value="4200">Hasta 4.200€/mes</option>
+            <option value="4500">Hasta 4.500€/mes</option>
+            <option value="4800">Hasta 4.800€/mes</option>
+            <option value="5100">Hasta 5.100€/mes</option>
+            <option value="5400">Hasta 5.400€/mes</option>
+            <option value="5700">Hasta 5.700€/mes</option>
+            <option value="6000">Hasta 6.000€/mes</option>
+            <option value="10000">Hasta 10.000€/mes</option>
+            <option value="20000">Hasta 20.000€/mes</option>
+          </select>
+        <select class="precio-venta-terrenos" id="precio-venta-terrenos-desde">
+            <option value="0">Precio desde</option>
+            <option value="30000">Desde 30.000€</option>
+            <option value="50000">Desde 50.000€</option>
+            <option value="100000">Desde 100.000€</option>
+            <option value="150000">Desde 150.000€</option>
+            <option value="200000">Desde 200.000€</option>
+            <option value="250000">Desde 250.000€</option>
+            <option value="300000">Desde 300.000€</option>
+            <option value="350000">Desde 350.000€</option>
+            <option value="400000">Desde 400.000€</option>
+            <option value="450000">Desde 450.000€</option>
+            <option value="500000">Desde 500.000€</option>
+            <option value="550000">Desde 550.000€</option>
+            <option value="600000">Desde 600.000€</option>
+            <option value="1200000">Desde 1.200.000€</option>
+            <option value="1500000">Desde 1.500.000€</option>
+            <option value="2000000">Desde 2.000.000€</option>
+            <option value="2500000">Desde 2.500.000€</option>
+            <option value="5000000">Desde 5.000.000€</option>
+          </select>
+        <select class="precio-venta-terrenos" id="precio-venta-terrenos-hasta">
+            <option value="0">Precio hasta</option>
+            <option value="50000">Hasta 50.000€</option>
+            <option value="100000">Hasta 100.000€</option>
+            <option value="150000">Hasta 150.000€</option>
+            <option value="200000">Hasta 200.000€</option>
+            <option value="250000">Hasta 250.000€</option>
+            <option value="300000">Hasta 300.000€</option>
+            <option value="350000">Hasta 350.000€</option>
+            <option value="400000">Hasta 400.000€</option>
+            <option value="450000">Hasta 450.000€</option>
+            <option value="500000">Hasta 500.000€</option>
+            <option value="550000">Hasta 550.000€</option>
+            <option value="600000">Hasta 600.000€</option>
+            <option value="1200000">Hasta 1.200.000€</option>
+            <option value="1500000">Hasta 1.500.000€</option>
+            <option value="2000000">Hasta 2.000.000€</option>
+            <option value="2500000">Desde 2.500.000€</option>
+            <option value="5000000">Desde 5.000.000€</option>
+          </select>
+        <select class="precio-alquiler-terrenos" id="precio-alquiler-terrenos-desde">
+            <option value="0">Precio desde</option>
+            <option value="100">Desde 100€/mes</option>
+            <option value="300">Desde 300€/mes</option>
+            <option value="600">Desde 600€/mes</option>
+            <option value="900">Desde 900€/mes</option>
+            <option value="1200">Desde 1.200€/mes</option>
+            <option value="1500">Desde 1.500€/mes</option>
+            <option value="1800">Desde 1.800€/mes</option>
+            <option value="2100">Desde 2.100€/mes</option>
+            <option value="2400">Desde 2.400€/mes</option>
+            <option value="2700">Desde 2.700€/mes</option>
+            <option value="3000">Desde 3.000€/mes</option>
+            <option value="3300">Desde 3.300€/mes</option>
+            <option value="3600">Desde 3.600€/mes</option>
+            <option value="3900">Desde 3.900€/mes</option>
+            <option value="4200">Desde 4.200€/mes</option>
+            <option value="4500">Desde 4.500€/mes</option>
+            <option value="4800">Desde 4.800€/mes</option>
+            <option value="5100">Desde 5.100€/mes</option>
+            <option value="5400">Desde 5.400€/mes</option>
+            <option value="5700">Desde 5.700€/mes</option>
+            <option value="6000">Desde 6.000€/mes</option>
+            <option value="10000">Desde 10.000€/mes</option>
+          </select>
+        <select class="precio-alquiler-terrenos" id="precio-alquiler-terrenos-hasta">
+            <option value="0">Precio hasta</option>
+            <option value="300">Hasta 300€/mes</option>
+            <option value="600">Hasta 600€/mes</option>
+            <option value="900">Hasta 900€/mes</option>
+            <option value="1200">Hasta 1.200€/mes</option>
+            <option value="1500">Hasta 1.500€/mes</option>
+            <option value="1800">Hasta 1.800€/mes</option>
+            <option value="2100">Hasta 2.100€/mes</option>
+            <option value="2400">Hasta 2.400€/mes</option>
+            <option value="2700">Hasta 2.700€/mes</option>
+            <option value="3000">Hasta 3.000€/mes</option>
+            <option value="3300">Hasta 3.300€/mes</option>
+            <option value="3600">Hasta 3.600€/mes</option>
+            <option value="3900">Hasta 3.900€/mes</option>
+            <option value="4200">Hasta 4.200€/mes</option>
+            <option value="4500">Hasta 4.500€/mes</option>
+            <option value="4800">Hasta 4.800€/mes</option>
+            <option value="5100">Hasta 5.100€/mes</option>
+            <option value="5400">Hasta 5.400€/mes</option>
+            <option value="5700">Hasta 5.700€/mes</option>
+            <option value="6000">Hasta 6.000€/mes</option>
+            <option value="10000">Hasta 10.000€/mes</option>
+            <option value="15000">Hasta 15.000€/mes</option>
+          </select>
+        <select class="precio-venta-trasteros" id="precio-venta-trasteros-desde">
+            <option value="0">Precio desde</option>
+            <option value="5000">Desde 5.000€</option>
+            <option value="10000">Desde 10.000€</option>
+            <option value="15000">Desde 15.000€</option>
+            <option value="20000">Desde 20.000€</option>
+            <option value="25000">Desde 25.000€</option>
+            <option value="30000">Desde 30.000€</option>
+            <option value="50000">Desde 50.000€</option>
+          </select>
+        <select class="precio-venta-trasteros" id="precio-venta-trasteros-hasta">
+            <option value="0">Precio hasta</option>
+            <option value="5000">Hasta 5.000€</option>
+            <option value="10000">Hasta 10.000€</option>
+            <option value="15000">Hasta 15.000€</option>
+            <option value="20000">Hasta 20.000€</option>
+            <option value="25000">Hasta 25.000€</option>
+            <option value="30000">Hasta 30.000€</option>
+            <option value="50000">Hasta 50.000€</option>
+          </select>
+        <select class="precio-alquiler-trasteros" id="precio-alquiler-trasteros-desde">
+            <option value="0">Precio desde</option>
+            <option value="50">Desde 30€/mes</option>
+            <option value="100">Desde 100€/mes</option>
+            <option value="200">Desde 200€/mes</option>
+            <option value="300">Desde 300€/mes</option>
+            <option value="400">Desde 400€/mes</option>
+            <option value="500">Desde 500€/mes</option>
+            <option value="1000">Desde 1000€/mes</option>
+          </select>
+        <select class="precio-alquiler-trasteros" id="precio-alquiler-trasteros-hasta">
+            <option value="0">Precio hasta</option>
+            <option value="100">Hasta 100€/mes</option>
+            <option value="200">Hasta 200€/mes</option>
+            <option value="300">Hasta 300€/mes</option>
+            <option value="400">Hasta 400€/mes</option>
+            <option value="500">Hasta 500€/mes</option>
+            <option value="1000">Hasta 1000€/mes</option>
+          </select>
+        <select class="precio-venta-garajes" id="precio-venta-garajes-desde">
+            <option value="0">Precio desde</option>
+            <option value="5000">Desde 2.000€</option>
+            <option value="5000">Desde 5.000€</option>
+            <option value="10000">Desde 10.000€</option>
+            <option value="15000">Desde 15.000€</option>
+            <option value="20000">Desde 20.000€</option>
+            <option value="25000">Desde 25.000€</option>
+            <option value="30000">Desde 30.000€</option>
+            <option value="35000">Desde 35.000€</option>
+            <option value="40000">Desde 40.000€</option>
+            <option value="45000">Desde 45.000€</option>
+            <option value="50000">Desde 50.000€</option>
+            <option value="100000">Desde 100.000€</option>
+            <option value="200000">Desde 200.000€</option>
+            <option value="500000">Desde 500.000€</option>
+          </select>
+        <select class="precio-venta-garajes" id="precio-venta-garajes-hasta">
+            <option value="0">Precio hasta</option>
+            <option value="5000">Hasta 5.000€</option>
+            <option value="10000">Hasta 10.000€</option>
+            <option value="15000">Hasta 15.000€</option>
+            <option value="20000">Hasta 20.000€</option>
+            <option value="25000">Hasta 25.000€</option>
+            <option value="30000">Hasta 30.000€</option>
+            <option value="35000">Hasta 35.000€</option>
+            <option value="40000">Hasta 40.000€</option>
+            <option value="45000">Hasta 45.000€</option>
+            <option value="50000">Hasta 50.000€</option>
+            <option value="100000">Hasta 100.000€</option>
+            <option value="200000">Hasta 200.000€</option>
+            <option value="500000">Hasta 500.000€</option>
+            <option value="1000000">Hasta 1.000.000€</option>
+          </select>
+        <select class="precio-alquiler-garajes" id="precio-alquiler-garajes-desde">
+          <option value="0">Precio desde</option>
+          <option value="30">Desde 30€/mes</option>
+          <option value="60">Desde 60€/mes</option>
+          <option value="90">Desde 90€/mes</option>
+          <option value="120">Desde 120€/mes</option>
+          <option value="150">Desde 150€/mes</option>
+          <option value="180">Desde 180€/mes</option>
+          <option value="210">Desde 210€/mes</option>
+          <option value="240">Desde 240€/mes</option>
+          <option value="270">Desde 270€/mes</option>
+          <option value="300">Desde 300€/mes</option>
+          <option value="500">Desde 500€/mes</option>
+          <option value="700">Desde 700€/mes</option>
+        </select>
+        <select class="precio-alquiler-garajes" id="precio-alquiler-garajes-hasta">
+          <option value="0">Precio hasta</option>
+          <option value="30">Hasta 30€/mes</option>
+          <option value="60">Hasta 60€/mes</option>
+          <option value="90">Hasta 90€/mes</option>
+          <option value="120">Hasta 120€/mes</option>
+          <option value="150">Hasta 150€/mes</option>
+          <option value="180">Hasta 180€/mes</option>
+          <option value="210">Hasta 210€/mes</option>
+          <option value="240">Hasta 240€/mes</option>
+          <option value="270">Hasta 270€/mes</option>
+          <option value="300">Hasta 300€/mes</option>
+          <option value="500">Hasta 500€/mes</option>
+          <option value="1000">Hasta 1000€/mes</option>
+          <option value="1000">Hasta 2000€/mes</option>
+        </select>
+      </fieldset>
+      <fieldset id="Caracteristicas">
+        <legend>Características</legend>
+        <select class="caracteristicas-viviendas" id="habitaciones-viviendas">
+            <option value="0">Habitaciones</option>
+            <option value="1">1 o más habs.</option>
+            <option value="2">2 o más habs.</option>
+            <option value="3">3 o más habs.</option>
+            <option value="4">4 o más habs.</option>
+          </select>
+        <select class="caracteristicas-viviendas" id="aseos-viviendas">
+            <option value="0">Baños</option>
+            <option value="1">1 o más baños</option>
+            <option value="2">2 o más baños</option>
+            <option value="3">3 o más baños</option>
+          </select>
+        <select class="caracteristicas-viviendas" id="superficie-viviendas">
+            <option value="0">Superficie (m2)</option>
+            <option value="60">Desde 60 m2</option>
+            <option value="80">Desde 80 m2</option>
+            <option value="100">Desde 100 m2</option>
+            <option value="120">Desde 120 m2</option>
+            <option value="140">Desde 140 m2</option>
+            <option value="160">Desde 160 m2</option>
+            <option value="180">Desde 180 m2</option>
+            <option value="200">Desde 200 m2</option>
+            <option value="220">Desde 220 m2</option>
+            <option value="240">Desde 240 m2</option>
+            <option value="260">Desde 260 m2</option>
+            <option value="280">Desde 280 m2</option>
+            <option value="300">Desde 300 m2</option>
+          </select>
+        <select class="caracteristicas-oficinas" id="superficie-oficinas">
+          <option value="0">Superficie (m2)</option>
+          <option value="50">Desde 50 m2</option>
+          <option value="100">Desde 100 m2</option>
+          <option value="150">Desde 150 m2</option>
+          <option value="200">Desde 200 m2</option>
+          <option value="250">Desde 250 m2</option>
+          <option value="300">Desde 300 m2</option>
+          <option value="350">Desde 350 m2</option>
+          <option value="400">Desde 400 m2</option>
+          <option value="450">Desde 450 m2</option>
+          <option value="500">Desde 500 m2</option>
+          <option value="550">Desde 550 m2</option>
+          <option value="600">Desde 600 m2</option>
+          <option value="650">Desde 650 m2</option>
+          <option value="700">Desde 700 m2</option>
+          <option value="750">Desde 750 m2</option>
+          <option value="800">Desde 800 m2</option>
+        </select>
+        <select class="caracteristicas-locales" id="superficie-locales">
+          <option value="0">Superficie (m2)</option>
+          <option value="50">Desde 50 m2</option>
+          <option value="100">Desde 100 m2</option>
+          <option value="150">Desde 150 m2</option>
+          <option value="200">Desde 200 m2</option>
+          <option value="250">Desde 250 m2</option>
+          <option value="300">Desde 300 m2</option>
+          <option value="350">Desde 350 m2</option>
+          <option value="400">Desde 400 m2</option>
+          <option value="450">Desde 450 m2</option>
+          <option value="500">Desde 500 m2</option>
+          <option value="550">Desde 550 m2</option>
+          <option value="600">Desde 600 m2</option>
+          <option value="650">Desde 650 m2</option>
+          <option value="700">Desde 700 m2</option>
+          <option value="750">Desde 750 m2</option>
+          <option value="800">Desde 800 m2</option>
+        </select>
+        <select class="caracteristicas-terrenos" id="uso-terrenos">
+          <option value="0">Usos</option>
+          <option value="rural">Rural</option>
+          <option value="urbano">Urbano</option>
+        </select>
+        <select class="caracteristicas-terrenos" id="pendiente-terrenos">
+            <option value="0">Pendiente</option>
+            <option value="baja">Baja</option>
+            <option value="media">Media</option>
+            <option value="alta">Alta</option>
+        </select>
+        <select class="caracteristicas-terrenos" id="superficie-terrenos">
+          <option value="0">Superficie (m2)</option>
+          <option value="200">Desde 200 m2</option>
+          <option value="400">Desde 400 m2</option>
+          <option value="600">Desde 600 m2</option>
+          <option value="800">Desde 800 m2</option>
+          <option value="1000">Desde 1000 m2</option>
+          <option value="1200">Desde 1200 m2</option>
+          <option value="1400">Desde 1400 m2</option>
+          <option value="1600">Desde 1600 m2</option>
+          <option value="1800">Desde 1800 m2</option>
+          <option value="2000">Desde 2000 m2</option>
+          <option value="2200">Desde 2200 m2</option>
+          <option value="2400">Desde 2400 m2</option>
+          <option value="2600">Desde 2600 m2</option>
+          <option value="2800">Desde 2800 m2</option>
+          <option value="3000">Desde 3000 m2</option>
+        </select>
+
+
+
+
+
+        <!-- Comprobar superficie trasteros -->
+        <select class="caracteristicas-trasteros" id="superficie-trasteros">
+          <option value="0">Superficie (m2)</option>
+          <option value="5">Desde 5 m2</option>
+          <option value="10">Desde 10 m2</option>
+          <option value="15">Desde 15 m2</option>
+          <option value="20">Desde 20 m2</option>
+          <option value="25">Desde 25 m2</option>
+        </select>
+
+
+
+
+
+
+        <select class="caracteristicas-garajes" id="vehiculo-garajes">
+          <option value="0">Tipo de vehículo</option>
+          <option value="1">Moto</option>
+          <option value="2">Coche</option>
+          <option value="3">Coche + Moto</option>
+        </select>
+        <select class="caracteristicas-garajes" id="tamanoVehiculo-garajes">
+          <option value="0">Tamaño de Vehículo</option>
+          <option value="1">Grande</option>
+          <option value="2">Pequeño</option>
+        </select>
+        <select class="caracteristicas-garajes" id="numeroPlazas-garajes">
+          <option value="0">Numero de plazas</option>
+          <option value="1">Una plaza</option>
+          <option value="1.5">Plaza Coche + Moto</option>
+          <option value="2">Dos plazas</option>
+          <option value="3">Más de dos plazas</option>
+        </select>
+      </fieldset>
+      <fieldset id="AntiguedadViviendas">
+        <legend>Antigüedad de construcción</legend>
+        <div class="btn-group">
+          <input type="checkbox" class="cajaCheck" id="subtipoAntiguedad1" value="1">
+          <button class="botonCheck" id="btnAntiguo">Antigüo</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoAntiguedad2" value="2">
+          <button class="botonCheck" id="btnModerno">Moderno</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoAntiguedad3" value="3">
+          <button class="botonCheck" id="btnObranueva">Obra nueva</button>
+        </div>
+      </fieldset>
+      <fieldset id="EstadoInmuebles">
+        <legend>Estado</legend>
+        <div class="btn-group">
+          <input type="checkbox" class="cajaCheck" id="subtipoEstado1" value="1">
+          <button class="botonCheck" id="btnNuevo">Nuevo</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoEstado2" value="2">
+          <button class="botonCheck" id="btnCasinuevo">Casi nuevo</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoEstado3" value="3">
+          <button class="botonCheck" id="btnMuybien">Muy bien</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoEstado4" value="4">
+          <button class="botonCheck" id="btnBien">Bien</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoEstado5" value="5">
+          <button class="botonCheck" id="btnReformado">Reformado</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoEstado6" value="6">
+          <button class="botonCheck" id="btnAreformar">A reformar</button>
+        </div>
+      </fieldset>
+      <fieldset id="ExtrasViviendas">
+        <legend>Extras</legend>
+        <div class="btn-group">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda1" value="1">
+          <button class="botonCheck" id="btnTerraza">Terraza</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda2" value="2">
+          <button class="botonCheck" id="btnJardin">Jardin</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda3" value="3">
+          <button class="botonCheck" id="btnPiscina">Piscina</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda4" value="4">
+          <button class="botonCheck" id="btnParking">Parking</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda5" value="5">
+          <button class="botonCheck" id="btnTrastero">Trastero</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda6" value="6">
+          <button class="botonCheck" id="btnAscensor">Ascensor</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda7" value="7">
+          <button class="botonCheck" id="btnAmueblado">Amueblado</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda8" value="8">
+          <button class="botonCheck" id="btnCalefaccion">Calefacción</button>
+        </div>
+      </fieldset>
+      <fieldset id="ExtrasHabitaciones">
+        <legend>Extras</legend>
+        <div class="btn-group">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraHabitaciones1" value="1">
+          <button class="botonCheck" id="btnAmuebladoHab">Amueblado</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraHabitaciones2" value="2">
+          <button class="botonCheck" id="btnAseosHab">Aseos</button>
+        </div>
+      </fieldset>
+      <fieldset id="ExtrasOficinas">
+        <legend>Extras</legend>
+        <div class="btn-group">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraOficinas1" value="1">
+          <button class="botonCheck" id="btnParkingOficinas">Parking</button>
+        </div>
+      </fieldset>
+      <fieldset id="ExtrasLocales">
+        <legend>Extras</legend>
+        <div class="btn-group">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraLocales1" value="1">
+          <button class="botonCheck" id="btnParkingLocales">Parking</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraLocales2" value="2">
+          <button class="botonCheck" id="btnCalefaccionLocales">Calefacción</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraLocales3" value="3">
+          <button class="botonCheck" id="btnAireAcondicionado">Aire acondicionado</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraLocales4" value="4">
+          <button class="botonCheck" id="btnSalidaHumos">Salida de humos</button>
+        </div>
+      </fieldset>
+      <fieldset id="ExtrasTerrenos">
+        <legend>Extras</legend>
+        <div class="btn-group">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraTerrenos1" value="1">
+          <button class="botonCheck" id="btnArbolado">Arbolado</button>
+        </div>
+      </fieldset>
+      <fieldset id="ExtrasTrasteros">
+        <legend>Extras</legend>
+        <div class="btn-group">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraTrasteros1" value="1">
+          <button class="botonCheck" id="btnVigilancia">Vigilancia 24h</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraTrasteros2" value="2">
+          <button class="botonCheck" id="btnAcceso">Acceso 24h/365 dias</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraTrasteros3" value="3">
+          <button class="botonCheck" id="btnCargaDescarga">Zona carga/descarga</button>
+        </div>
+      </fieldset>
+      <fieldset id="ExtrasGarajes">
+        <legend>Extras</legend>
+        <div class="btn-group">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraGarajes1" value="1">
+          <button class="botonCheck" id="btnVigilanciaPrivada">Vigilancia privada</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraGarajes2" value="2">
+          <button class="botonCheck" id="btnPuertaAutomatica">Puerta automática</button>
+        </div>
+      </fieldset>
+      </div>
+      <div class="cntBtnEjecutar">
+        <button class="btnEjecutar" id="btnEjecutarConsulta">Aplicar filtros</button>
+      </div>
+    </div>
+    <div class="menu" id="menuServiceAreas">
+      <div class="cabeceraMenu">Descubre lo que hay a tu alrededor
+        <button title="Cerrar" class="btnCerrarVentana" id="btnCerrarVentana"><img class="imgCerrarVentana" src="images\delete.png"></button>
+      </div>
+      <div class="contParamsSA">
+        <fieldset id="explicacion">
+          <p align="justify">Esta herramienta permite visualizar los sitios de interés que se encuentran dentro de las regiones accesibles o áreas de servicio delimitadas por determinados intervalos de tiempo, andando o en coche, desde una ubicación marcada.</p>
+          <p align="justify">Para utilizar la herramienta se deben seguir los pasos especificados a continuación:</p>
+          <p align="justify"> 1. Marcar un punto de partida en el mapa.</p>
+          <p align="justify"> 2. Elegir los sitios de interés que se van a mostrar.</p>
+          <p align="justify"> 3. Elegir el modo de transporte: andando o en coche.</p>
+          <p align="justify"> 4. Especificar los valores de corte, en minutos, que van a determinar las regiones accesibles.
+            <br/>(Los valores de corte se deben introducir separados de una coma o un espacio. Por ejemplo: 1, 5, 10 o bien 1 5 10).</p>
+        </fieldset>
+        <fieldset id="ubicacion">
+          <legend>Marcar la ubicación</legend>
+          Pulsa el botón y marca un punto en el mapa
+          <button class="btnseleccionPunto">Seleccionar punto</button>
+        </fieldset>
+        <fieldset id="seleccionSitiosInteres">
+          <legend>Seleccionar los Sitios de Interés</legend>
+          <p align="justify">Educación:</p>
+          <input type="checkbox" class="cajaCheck" id="subtipoSIEducacion1" value="1">
+          <button class="botonCheck" id="btn-colegiosPrimaria">Colegios de primaria</button>
+        </fieldset>
+        <fieldset id="ubicacion">
+          <legend>Definir los valores de corte</legend>
+          <input type="radio" class="radiobtn" name="valorCorte" id="minCoche" />Minutos en coche
+          <input type="radio" class="radiobtn" name="valorCorte" id="minAndando" />Minutos andando<br/>
+          <input type="number" name="minsCoche" min="0" max="15" value="1">
+          <input type="number" name="minsCoche" min="0" max="15" value="5">
+          <input type="number" name="minsCoche" min="0" max="15" value="10">
+          <input type="number" name="minsAndando" min="0" max="60" value="5">
+          <input type="number" name="minsAndando" min="0" max="60" value="10">
+          <input type="number" name="minsAndando" min="0" max="60" value="15">
+        </fieldset>
+      </div>
+      <div class="cntBtnEjecutar">
+        <button class="btnEjecutar" id="btnEjecutarGPSA">Ejecutar</button>
+      </div>
+    </div>
+    <div class="contMapa">
+      <div id="map"></div>
+    </div>
+    </body>
+
+</html>

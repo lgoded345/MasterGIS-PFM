@@ -5,27 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Aplicación de Consultas</title>
+  <!-- Link a los archivos css y js -->
   <link rel="stylesheet" href="https://js.arcgis.com/3.23/esri/themes/calcite/dijit/calcite.css">
   <link rel="stylesheet" href="https://js.arcgis.com/3.23/esri/css/esri.css">
-  <link rel="stylesheet" href="css/styles.css" type="text/css">
+  <link rel="stylesheet" href="css/globalStyles.css" type="text/css">
+  <link rel="stylesheet" href="css/widgetsStyles.css" type="text/css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rammetto+One">
   <script src="https://js.arcgis.com/3.23/"></script>
-  <script src="js/script.js" type="text/javascript"></script>
+  <script src="js/appStartUp.js" type="text/javascript"></script>
+  <script src="js/botones.js" type="text/javascript"></script>
+  <script src="js/widgetConsulta.js" type="text/javascript"></script>
+  <script src="js/widgetServiceAreas.js" type="text/javascript"></script>
 </head>
 
 <div class="contenedor">
+  <!-- Contenedor de Título -->
   <div class="contTitulo">
-    <div class="titulo">PropertFy</div>
+    <div class="contLogo"><img class="imgLogo" src="images\logo.png">
+    </div>
+    <div class="titulo">Aplicacion de Consultas</div>
   </div>
-  <div class="barraIzq">
-    <button title="Realiza una consulta" class="botonesIzq" id="btnConsultas"><img class="imgIconos" src="images\lupa.png"></button>
-    <button title="Descubre lo que hay a tu alrededor" class="botonesIzq" id="btnServiceAreas"><img class="imgIconos" src="images\mapmarker.png"></button>
-    <button title="Calcula tu hipoteca" class="botonesIzq" id="btnHipotecas"><img class="imgIconos" src="images\bankdollar.png"></button>
-    <button title="Analiza las estadísticas" class="botonesIzq" id="btnEstadisticas"><img class="imgIconos" src="images\graphs.png"></button>
-  </div>
+
+  <!-- Interfaz de Widget de Consultas de anuncios -->
   <div class="menu" id="menuConsultas">
     <div class="cabeceraMenu">Realiza tu Consulta
-      <div title="Cerrar" class="btnCerrarVentana" id="btnCerrarVentana"><img class="imgCerrarVentana" src="images\delete.png"></div>
+      <div title="Cerrar" class="btnCerrarVentana" id="btnCerrarVentana1"><img class="imgCerrarVentana" src="images\delete.png"></div>
     </div>
     <div class="contFiltros">
       <fieldset id="TipoTransaccion">
@@ -45,6 +49,7 @@
           <label class="labelTipoInmueble" id="labelTerrenos"><input type="radio" class="radiobtn" name="inmueble" id="terrenos">Terrenos</label>
           <label class="labelTipoInmueble" id="labelTrasteros"><input type="radio" class="radiobtn" name="inmueble" id="trasteros">Trasteros</label>
           <label class="labelTipoInmueble" id="labelGarajes"><input type="radio" class="radiobtn" name="inmueble" id="garajes">Garajes</label>
+        </div>
       </fieldset>
       <fieldset id="SubTipoViviendas">
         <legend>Tipo de vivienda</legend>
@@ -64,9 +69,9 @@
       <fieldset id="SubTipoLocales">
         <legend>Tipo de local</legend>
         <div class="btn-group">
-          <input type="checkbox" class="cajaCheck" id="subtipoLocal1" value="1">
-          <button class="botonCheck" id="btnLocal">Local Comercial</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoLocal2" value="2">
+          <input type="checkbox" class="cajaCheck" id="subtipoLocal1" value="0">
+          <button class="botonCheck" id="btnLocal">Local comercial</button>
+          <input type="checkbox" class="cajaCheck" id="subtipoLocal2" value="1">
           <button class="botonCheck" id="btnNave">Nave industrial</button>
         </div>
       </fieldset>
@@ -75,7 +80,7 @@
         <div class="btn-group">
           <input type="checkbox" class="cajaCheck" id="subtipoTerreno1" value="1">
           <button class="botonCheck" id="btnUrbano">Urbano</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoTerreno2" value="2">
+          <input type="checkbox" class="cajaCheck" id="subtipoTerreno2" value="0">
           <button class="botonCheck" id="btnRural">Rural</button>
         </div>
       </fieldset>
@@ -129,7 +134,7 @@
             <option value="4000000">Desde 4.000.000€</option>
           </select>
         <select class="precio-venta-viviendas" id="precio-venta-viviendas-hasta">
-            <option value="0">Precio hasta</option>
+            <option value="10000000">Precio hasta</option>
             <option value="50000">Hasta 30.000€</option>
             <option value="50000">Hasta 50.000€</option>
             <option value="75000">Hasta 75.000€</option>
@@ -221,7 +226,7 @@
             <option value="8000">Desde 8000€/mes</option>
           </select>
         <select class="precio-alquiler-viviendas" id="precio-alquiler-viviendas-hasta">
-            <option value="0">Precio hasta</option>
+            <option value="9000">Precio hasta</option>
             <option value="100">Hasta 100€/mes</option>
             <option value="150">Hasta 150€/mes</option>
             <option value="200">Hasta 200€/mes</option>
@@ -283,11 +288,9 @@
               <option value="450">Desde 450€/mes</option>
               <option value="475">Desde 475€/mes</option>
               <option value="500">Desde 500€/mes</option>
-              <option value="550">Desde 550€/mes</option>
-              <option value="600">Desde 600€/mes</option>
             </select>
         <select class="precio-alquiler-habitaciones" id="precio-alquiler-habitaciones-hasta">
-              <option value="0">Precio hasta</option>
+              <option value="600">Precio hasta</option>
               <option value="100">Desde 100€/mes</option>
               <option value="125">Desde 125€/mes</option>
               <option value="150">Desde 150€/mes</option>
@@ -326,10 +329,9 @@
             <option value="1500000">Desde 1.500.000€</option>
             <option value="2000000">Desde 2.000.000€</option>
             <option value="5000000">Desde 5.000.000€</option>
-            <option value="10000000">Desde 10.000.000€</option>
           </select>
         <select class="precio-venta-oficinas" id="precio-venta-oficinas-hasta">
-            <option value="0">Precio hasta</option>
+            <option value="10000000">Precio hasta</option>
             <option value="50000">Hasta 50.000€</option>
             <option value="100000">Hasta 100.000€</option>
             <option value="150000">Hasta 150.000€</option>
@@ -371,10 +373,9 @@
             <option value="5400">Desde 5.400€/mes</option>
             <option value="5700">Desde 5.700€/mes</option>
             <option value="6000">Desde 6.000€/mes</option>
-            <option value="10000">Desde 10.000€/mes</option>
           </select>
         <select class="precio-alquiler-oficinas" id="precio-alquiler-oficinas-hasta">
-            <option value="0">Precio hasta</option>
+            <option value="10000">Precio hasta</option>
             <option value="100">Hasta 100€/mes</option>
             <option value="300">Hasta 300€/mes</option>
             <option value="600">Hasta 600€/mes</option>
@@ -418,10 +419,9 @@
             <option value="1200000">Desde 1.200.000€</option>
             <option value="1500000">Desde 1.500.000€</option>
             <option value="2000000">Desde 2.000.000€</option>
-            <option value="5000000">Desde 5.000.000€</option>
           </select>
         <select class="precio-venta-locales" id="precio-venta-locales-hasta">
-            <option value="0">Precio hasta</option>
+            <option value="5000000">Precio hasta</option>
             <option value="20000">Hasta 20.000€</option>
             <option value="50000">Hasta 50.000€</option>
             <option value="100000">Hasta 100.000€</option>
@@ -465,7 +465,7 @@
             <option value="10000">Desde 10.000€/mes</option>
           </select>
         <select class="precio-alquiler-locales" id="precio-alquiler-locales-hasta">
-            <option value="0">Precio hasta</option>
+            <option value="20000">Precio hasta</option>
             <option value="300">Hasta 300€/mes</option>
             <option value="600">Hasta 600€/mes</option>
             <option value="900">Hasta 900€/mes</option>
@@ -508,10 +508,9 @@
             <option value="1500000">Desde 1.500.000€</option>
             <option value="2000000">Desde 2.000.000€</option>
             <option value="2500000">Desde 2.500.000€</option>
-            <option value="5000000">Desde 5.000.000€</option>
           </select>
         <select class="precio-venta-terrenos" id="precio-venta-terrenos-hasta">
-            <option value="0">Precio hasta</option>
+            <option value="5000000">Precio hasta</option>
             <option value="50000">Hasta 50.000€</option>
             <option value="100000">Hasta 100.000€</option>
             <option value="150000">Hasta 150.000€</option>
@@ -556,7 +555,7 @@
             <option value="10000">Desde 10.000€/mes</option>
           </select>
         <select class="precio-alquiler-terrenos" id="precio-alquiler-terrenos-hasta">
-            <option value="0">Precio hasta</option>
+            <option value="15000">Precio hasta</option>
             <option value="300">Hasta 300€/mes</option>
             <option value="600">Hasta 600€/mes</option>
             <option value="900">Hasta 900€/mes</option>
@@ -588,10 +587,9 @@
             <option value="20000">Desde 20.000€</option>
             <option value="25000">Desde 25.000€</option>
             <option value="30000">Desde 30.000€</option>
-            <option value="50000">Desde 50.000€</option>
           </select>
         <select class="precio-venta-trasteros" id="precio-venta-trasteros-hasta">
-            <option value="0">Precio hasta</option>
+            <option value="50000">Precio hasta</option>
             <option value="5000">Hasta 5.000€</option>
             <option value="10000">Hasta 10.000€</option>
             <option value="15000">Hasta 15.000€</option>
@@ -608,10 +606,9 @@
             <option value="300">Desde 300€/mes</option>
             <option value="400">Desde 400€/mes</option>
             <option value="500">Desde 500€/mes</option>
-            <option value="1000">Desde 1000€/mes</option>
           </select>
         <select class="precio-alquiler-trasteros" id="precio-alquiler-trasteros-hasta">
-            <option value="0">Precio hasta</option>
+            <option value="1000">Precio hasta</option>
             <option value="100">Hasta 100€/mes</option>
             <option value="200">Hasta 200€/mes</option>
             <option value="300">Hasta 300€/mes</option>
@@ -637,7 +634,7 @@
             <option value="500000">Desde 500.000€</option>
           </select>
         <select class="precio-venta-garajes" id="precio-venta-garajes-hasta">
-            <option value="0">Precio hasta</option>
+            <option value="1000000">Precio hasta</option>
             <option value="5000">Hasta 5.000€</option>
             <option value="10000">Hasta 10.000€</option>
             <option value="15000">Hasta 15.000€</option>
@@ -669,7 +666,7 @@
           <option value="700">Desde 700€/mes</option>
         </select>
         <select class="precio-alquiler-garajes" id="precio-alquiler-garajes-hasta">
-          <option value="0">Precio hasta</option>
+          <option value="1000">Precio hasta</option>
           <option value="30">Hasta 30€/mes</option>
           <option value="60">Hasta 60€/mes</option>
           <option value="90">Hasta 90€/mes</option>
@@ -756,14 +753,14 @@
         </select>
         <select class="caracteristicas-terrenos" id="uso-terrenos">
           <option value="0">Usos</option>
-          <option value="rural">Rural</option>
-          <option value="urbano">Urbano</option>
+          <option value="Rural">Rural</option>
+          <option value="Urbano">Urbano</option>
         </select>
         <select class="caracteristicas-terrenos" id="pendiente-terrenos">
             <option value="0">Pendiente</option>
-            <option value="baja">Baja</option>
-            <option value="media">Media</option>
-            <option value="alta">Alta</option>
+            <option value="Baja">Baja</option>
+            <option value="Media">Media</option>
+            <option value="Alta">Alta</option>
         </select>
         <select class="caracteristicas-terrenos" id="superficie-terrenos">
           <option value="0">Superficie (m2)</option>
@@ -783,199 +780,327 @@
           <option value="2800">Desde 2800 m2</option>
           <option value="3000">Desde 3000 m2</option>
         </select>
-
-
-
-
-
-        <!-- Comprobar superficie trasteros -->
         <select class="caracteristicas-trasteros" id="superficie-trasteros">
           <option value="0">Superficie (m2)</option>
           <option value="5">Desde 5 m2</option>
-          <option value="10">Desde 10 m2</option>
-          <option value="15">Desde 15 m2</option>
-          <option value="20">Desde 20 m2</option>
           <option value="25">Desde 25 m2</option>
+          <option value="50">Desde 50 m2</option>
+          <option value="100">Desde 100 m2</option>
         </select>
-
-
-
-
-
-
         <select class="caracteristicas-garajes" id="vehiculo-garajes">
           <option value="0">Tipo de vehículo</option>
-          <option value="1">Moto</option>
-          <option value="2">Coche</option>
-          <option value="3">Coche + Moto</option>
+          <option value="Moto">Moto</option>
+          <option value="Coche">Coche</option>
+          <option value="Coche y moto">Coche + Moto</option>
         </select>
         <select class="caracteristicas-garajes" id="tamanoVehiculo-garajes">
           <option value="0">Tamaño de Vehículo</option>
-          <option value="1">Grande</option>
-          <option value="2">Pequeño</option>
+          <option value="Grande">Grande</option>
+          <option value="Pequeno">Pequeño</option>
         </select>
         <select class="caracteristicas-garajes" id="numeroPlazas-garajes">
           <option value="0">Numero de plazas</option>
           <option value="1">Una plaza</option>
-          <option value="1.5">Plaza Coche + Moto</option>
+          <option value="1 coche + 1 moto">Plaza Coche + Moto</option>
           <option value="2">Dos plazas</option>
-          <option value="3">Más de dos plazas</option>
+          <option value="+ de 2">Más de dos plazas</option>
         </select>
       </fieldset>
       <fieldset id="AntiguedadViviendas">
         <legend>Antigüedad de construcción</legend>
         <div class="btn-group">
-          <input type="checkbox" class="cajaCheck" id="subtipoAntiguedad1" value="1">
+          <input type="checkbox" class="cajaCheck" id="subtipoAntiguedad1" value="Antiguo">
           <button class="botonCheck" id="btnAntiguo">Antigüo</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoAntiguedad2" value="2">
+          <input type="checkbox" class="cajaCheck" id="subtipoAntiguedad2" value="Moderno">
           <button class="botonCheck" id="btnModerno">Moderno</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoAntiguedad3" value="3">
+          <input type="checkbox" class="cajaCheck" id="subtipoAntiguedad3" value="Obra Nueva">
           <button class="botonCheck" id="btnObranueva">Obra nueva</button>
         </div>
       </fieldset>
       <fieldset id="EstadoInmuebles">
         <legend>Estado</legend>
         <div class="btn-group">
-          <input type="checkbox" class="cajaCheck" id="subtipoEstado1" value="1">
+          <input type="checkbox" class="cajaCheck" id="subtipoEstado1" value="Nuevo">
           <button class="botonCheck" id="btnNuevo">Nuevo</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoEstado2" value="2">
+          <input type="checkbox" class="cajaCheck" id="subtipoEstado2" value="Casi nuevo">
           <button class="botonCheck" id="btnCasinuevo">Casi nuevo</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoEstado3" value="3">
+          <input type="checkbox" class="cajaCheck" id="subtipoEstado3" value="Muy bien">
           <button class="botonCheck" id="btnMuybien">Muy bien</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoEstado4" value="4">
+          <input type="checkbox" class="cajaCheck" id="subtipoEstado4" value="Bien">
           <button class="botonCheck" id="btnBien">Bien</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoEstado5" value="5">
+          <input type="checkbox" class="cajaCheck" id="subtipoEstado5" value="Reformado">
           <button class="botonCheck" id="btnReformado">Reformado</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoEstado6" value="6">
+          <input type="checkbox" class="cajaCheck" id="subtipoEstado6" value="A reformar">
           <button class="botonCheck" id="btnAreformar">A reformar</button>
         </div>
       </fieldset>
       <fieldset id="ExtrasViviendas">
         <legend>Extras</legend>
         <div class="btn-group">
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda1" value="1">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda1">
           <button class="botonCheck" id="btnTerraza">Terraza</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda2" value="2">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda2">
           <button class="botonCheck" id="btnJardin">Jardin</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda3" value="3">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda3">
           <button class="botonCheck" id="btnPiscina">Piscina</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda4" value="4">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda4">
           <button class="botonCheck" id="btnParking">Parking</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda5" value="5">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda5">
           <button class="botonCheck" id="btnTrastero">Trastero</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda6" value="6">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda6">
           <button class="botonCheck" id="btnAscensor">Ascensor</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda7" value="7">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda7">
           <button class="botonCheck" id="btnAmueblado">Amueblado</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda8" value="8">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraVivienda8">
           <button class="botonCheck" id="btnCalefaccion">Calefacción</button>
         </div>
       </fieldset>
       <fieldset id="ExtrasHabitaciones">
         <legend>Extras</legend>
         <div class="btn-group">
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraHabitaciones1" value="1">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraHabitaciones1">
           <button class="botonCheck" id="btnAmuebladoHab">Amueblado</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraHabitaciones2" value="2">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraHabitaciones2">
           <button class="botonCheck" id="btnAseosHab">Aseos</button>
         </div>
       </fieldset>
       <fieldset id="ExtrasOficinas">
         <legend>Extras</legend>
         <div class="btn-group">
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraOficinas1" value="1">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraOficinas1">
           <button class="botonCheck" id="btnParkingOficinas">Parking</button>
         </div>
       </fieldset>
       <fieldset id="ExtrasLocales">
         <legend>Extras</legend>
         <div class="btn-group">
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraLocales1" value="1">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraLocales1">
           <button class="botonCheck" id="btnParkingLocales">Parking</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraLocales2" value="2">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraLocales2">
           <button class="botonCheck" id="btnCalefaccionLocales">Calefacción</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraLocales3" value="3">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraLocales3">
           <button class="botonCheck" id="btnAireAcondicionado">Aire acondicionado</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraLocales4" value="4">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraLocales4">
           <button class="botonCheck" id="btnSalidaHumos">Salida de humos</button>
         </div>
       </fieldset>
       <fieldset id="ExtrasTerrenos">
         <legend>Extras</legend>
         <div class="btn-group">
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraTerrenos1" value="1">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraTerrenos1">
           <button class="botonCheck" id="btnArbolado">Arbolado</button>
         </div>
       </fieldset>
       <fieldset id="ExtrasTrasteros">
         <legend>Extras</legend>
         <div class="btn-group">
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraTrasteros1" value="1">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraTrasteros1">
           <button class="botonCheck" id="btnVigilancia">Vigilancia 24h</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraTrasteros2" value="2">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraTrasteros2">
           <button class="botonCheck" id="btnAcceso">Acceso 24h/365 dias</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraTrasteros3" value="3">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraTrasteros3">
           <button class="botonCheck" id="btnCargaDescarga">Zona carga/descarga</button>
         </div>
       </fieldset>
       <fieldset id="ExtrasGarajes">
         <legend>Extras</legend>
         <div class="btn-group">
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraGarajes1" value="1">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraGarajes1">
           <button class="botonCheck" id="btnVigilanciaPrivada">Vigilancia privada</button>
-          <input type="checkbox" class="cajaCheck" id="subtipoExtraGarajes2" value="2">
+          <input type="checkbox" class="cajaCheck" id="subtipoExtraGarajes2">
           <button class="botonCheck" id="btnPuertaAutomatica">Puerta automática</button>
         </div>
       </fieldset>
-      </div>
-      <div class="cntBtnEjecutar">
-        <button class="btnEjecutar" id="btnEjecutarConsulta">Aplicar filtros</button>
+    </div>
+    <div class="cntBtnEjecutar">
+      <button class="btnEjecutar" id="btnEjecutarConsulta">Aplicar filtros</button>
+    </div>
+  </div>
+
+  <!-- Interfaz de Widget de Localizacion de Sitios de Interes -->
+  <div class="menu" id="menuServiceAreas">
+    <div class="cabeceraMenu">Descubre lo que hay a tu alrededor
+      <div title="Cerrar" class="btnCerrarVentana" id="btnCerrarVentana2"><img class="imgCerrarVentana" src="images\delete.png"></div>
+    </div>
+    <div class="contParamsSA">
+      <fieldset id="explicacion">
+        <p align="justify">Esta herramienta permite visualizar los sitios de interés que se encuentran dentro de las regiones accesibles o áreas de servicio delimitadas por determinados intervalos de tiempo, andando o en coche, desde una ubicación marcada. Para utilizar
+          la herramienta se deben seguir los pasos especificados a continuación.</p>
+      </fieldset>
+      <fieldset id="seleccionSitiosInteres">
+        <legend>Sitios de Interés</legend>
+        <h4>Elige los sitios de interés que se van a mostrar:</h4>
+        <div class="bloqueSitiosInteres">
+          <input type="checkbox" class="cajaCheck" id="tipoEducacion">
+          <button class="botonCheck3" id="btnEducacion">Educación</button>
+        </div>
+        <fieldset id="bloqueEducacion">
+          <div class="bloqueBotones2">
+            <input type="checkbox" class="cajaCheck" id="subtipoEducacion1" value="1">
+            <button class="botonCheck2" id="btnUniversidad">Universidades</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoEducacion2" value="2">
+            <button class="botonCheck2" id="btnEducacionArtistica">Educación Artística</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoEducacion3" value="3">
+            <button class="botonCheck2" id="btnEducacionEspecial">Educación Especial</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoEducacion4" value="4">
+            <button class="botonCheck2" id="btnEducacionInfantil">Educación Infantil</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoEducacion5" value="5">
+            <button class="botonCheck2" id="btnEducacionPrimaria">Educación Infantil y Primaria</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoEducacion6" value="6">
+            <button class="botonCheck2" id="btnEducacionSecundaria">Educación Infantil, Primaria y Secundaria</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoEducacion7" value="7">
+            <button class="botonCheck2" id="btnEducacionAdultos">Educación para Adultos</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoEducacion8" value="8">
+            <button class="botonCheck2" id="btnInstitutoSecundaria">Instituto de Secundaria o Formación Profesional</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoEducacion9" value="9">
+            <button class="botonCheck2" id="btnEscuelaIdiomas">Escuela Oficial de Idiomas</button>
+          </div>
+        </fieldset>
+        <div class="bloqueSitiosInteres">
+          <input type="checkbox" class="cajaCheck" id="tipoComercio">
+          <button class="botonCheck3" id="btnComercio">Comercio</button>
+        </div>
+        <fieldset id="bloqueComercio">
+          <div class="bloqueBotones2">
+            <input type="checkbox" class="cajaCheck" id="subtipoComercio10" value="10">
+            <button class="botonCheck2" id="btnCentroComercial">Centro Comercial</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoComercio11" value="11">
+            <button class="botonCheck2" id="btnAlimentacion">Alimentación</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoComercio12" value="12">
+            <button class="botonCheck2" id="btnGrandesSuperficies">Grandes Superficies</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoComercio13" value="13">
+            <button class="botonCheck2" id="btnHipermercado">Hipermercado</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoComercio14" value="14">
+            <button class="botonCheck2" id="btnMercadoAbastos">Mercado de Abastos</button>
+          </div>
+        </fieldset>
+        <div class="bloqueSitiosInteres">
+          <input type="checkbox" class="cajaCheck" id="tipoTransportes">
+          <button class="botonCheck3" id="btnTransportes">Transportes y Comunicaciones</button>
+        </div>
+        <fieldset id="bloqueTransportes">
+          <div class="bloqueBotones2">
+            <input type="checkbox" class="cajaCheck" id="subtipoTransporte15" value="15">
+            <button class="botonCheck2" id="btnCercanias">Cercanías</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoTransporte16" value="16">
+            <button class="botonCheck2" id="btnMetro">Metro</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoTransporte17" value="17">
+            <button class="botonCheck2" id="btnAparcamiento">Parking</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoTransporte18" value="18">
+            <button class="botonCheck2" id="btnEstacionesServicio">Estacion de Servicio</button>
+          </div>
+        </fieldset>
+        <div class="bloqueSitiosInteres">
+          <input type="checkbox" class="cajaCheck" id="tipoOcio">
+          <button class="botonCheck3" id="btnOcio">Ocio y Entretenimiento</button>
+        </div>
+        <fieldset id="bloqueOcio">
+          <div class="bloqueBotones2">
+            <input type="checkbox" class="cajaCheck" id="subtipoOcio19" value="19">
+            <button class="botonCheck2" id="btnCine">Cine</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoOcio20" value="20">
+            <button class="botonCheck2" id="btnTeatro">Teatro</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoOcio21" value="21">
+            <button class="botonCheck2" id="btnJardines">Jardines o Parques</button>
+          </div>
+        </fieldset>
+        <div class="bloqueSitiosInteres">
+          <input type="checkbox" class="cajaCheck" id="tipoSalud">
+          <button class="botonCheck3" id="btnSalud">Salud</button>
+        </div>
+        <fieldset id="bloqueSalud">
+          <div class="bloqueBotones2">
+            <input type="checkbox" class="cajaCheck" id="subtipoSalud22" value="22">
+            <button class="botonCheck2" id="btnFarmacia">Farmacia</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoSalud23" value="23">
+            <button class="botonCheck2" id="btnConsultorio">Consultorio de Salud</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoSalud24" value="24">
+            <button class="botonCheck2" id="btnCentroSalud">Centro de Salud</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoSalud25" value="25">
+            <button class="botonCheck2" id="btnHospital">Hospital</button>
+          </div>
+        </fieldset>
+        <div class="bloqueSitiosInteres">
+          <input type="checkbox" class="cajaCheck" id="tipoProteccion">
+          <button class="botonCheck3" id="btnProteccion">Protección y Seguridad</button>
+        </div>
+        <fieldset id="bloqueProteccion">
+          <div class="bloqueBotones2">
+            <input type="checkbox" class="cajaCheck" id="subtipoProteccion26" value="26">
+            <button class="botonCheck2" id="btnCruzRoja">Cruz Roja</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoProteccion27" value="27">
+            <button class="botonCheck2" id="btnGuardiaCivil">Guardia Civil</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoProteccion28" value="28">
+            <button class="botonCheck2" id="btnPoliciaLocal">Policía Local</button>
+            <input type="checkbox" class="cajaCheck" id="subtipoProteccion29" value="29">
+            <button class="botonCheck2" id="btnPoliciaNacional">Policía Nacional</button>
+          </div>
+        </fieldset>
+      </fieldset>
+      <fieldset id="ubicacion">
+        <legend>Ubicación</legend>
+        <h4>Pulsa el botón y selecciona una ubicación en el mapa:</h4>
+        <div class="bloqueBotones" id="bloqueSelecionPunto">
+          <button class="btnseleccionPunto" id="btnSeleccionPunto">Seleccionar ubicación</button>
+        </div>
+      </fieldset>
+      <fieldset id="modoTransporte">
+        <legend>Modo de transporte</legend>
+        <h4>Elige el modo de transporte:</h4>
+        <div class="bloqueBotones2" id="bloqueModoTransporte">
+          <label class="labelModoTransporte" id="labelAndando"><input type="radio" class="radiobtn" name="valorCorte" id="btnAndando" value="TiempoAndando" checked>Andando</label>
+          <label class="labelModoTransporte" id="labelCoche"><input type="radio" class="radiobtn" name="valorCorte" id="btnCoche" value="TiempoCoche">En coche</label>
+        </div>
+      </fieldset>
+      <fieldset id="valoresAndando">
+        <legend>Intervalos de tiempo</legend>
+        <h4>Especifica los valores de corte (en minutos) que van a determinar las regiones accesibles:</h4>
+        <div class="bloqueBotones2" id="bloqueValoresCorteAndando">
+          <input type="number" class="inputValoresCorte" id="inputValorCorte1" name="minsAndando" min="1" max="60" value="5">
+          <input type="number" class="inputValoresCorte" id="inputValorCorte2" name="minsAndando" min="1" max="60" value="10">
+          <input type="number" class="inputValoresCorte" id="inputValorCorte3" name="minsAndando" min="1" max="60" value="15">
+        </div>
+      </fieldset>
+      <fieldset id="valoresCoche">
+        <legend>Intervalos de tiempo</legend>
+        <h4>Especifica los valores de corte (en minutos) que van a determinar las regiones accesibles:</h4>
+        <div class="bloqueBotones2" id="bloqueValoresCorteCoche">
+          <input type="number" class="inputValoresCorte" id="inputValorCorte4" name="minsCoche" min="1" max="30" value="1">
+          <input type="number" class="inputValoresCorte" id="inputValorCorte5" name="minsCoche" min="1" max="30" value="5">
+          <input type="number" class="inputValoresCorte" id="inputValorCorte6" name="minsCoche" min="1" max="30" value="15">
+        </div>
+      </fieldset>
+    </div>
+    <div class="cntBtnEjecutar">
+      <button class="btnEjecutar" id="btnEjecutarGPS">Ejecutar</button>
+      <button class="btnLimpiar" id="btnLimpiar">Limpiar</button>
+    </div>
+  </div>
+
+  <!-- Contenedor del Mapa -->
+  <div class="contMapa" id="contMapa">
+    <div id="map">
+      <!-- Botones de los Widgets desarrollados -->
+      <button title="Realiza una consulta" class="botonesIzq" id="btnConsultas"><img class="imgIconos" src="images\lupa.png"></button>
+      <button title="Descubre lo que hay a tu alrededor" class="botonesIzq" id="btnServiceAreas"><img class="imgIconos" src="images\mapmarker.png"></button>
+      <!-- Botones de los Widgets de la API de Javascript de ESRI -->
+      <div id="search"></div>
+      <div id="btnHome"></div>
+      <div id="btnLocate"></div>
+      <div id="bmToggle"></div>
+      <div class="contLegend">
+        <div class="tituloLegend">Leyenda</div>
+        <div id="contInmuebles">
+          <div class "tituloInmuebles" style="font-size:14px">Inmuebles</div>
+          <div id="legendInmuebles"></div>
+        </div>
+        <div id="contSitiosInteres">
+          <div class "tituloSitiosInteres" style="font-size:14px">Sitios de Interés</div>
+          <div id="legendSitiosInteres"></div>
+        </div>
       </div>
     </div>
-    <div class="menu" id="menuServiceAreas">
-      <div class="cabeceraMenu">Descubre lo que hay a tu alrededor
-        <button title="Cerrar" class="btnCerrarVentana" id="btnCerrarVentana"><img class="imgCerrarVentana" src="images\delete.png"></button>
-      </div>
-      <div class="contParamsSA">
-        <fieldset id="explicacion">
-          <p align="justify">Esta herramienta permite visualizar los sitios de interés que se encuentran dentro de las regiones accesibles o áreas de servicio delimitadas por determinados intervalos de tiempo, andando o en coche, desde una ubicación marcada.</p>
-          <p align="justify">Para utilizar la herramienta se deben seguir los pasos especificados a continuación:</p>
-          <p align="justify"> 1. Marcar un punto de partida en el mapa.</p>
-          <p align="justify"> 2. Elegir los sitios de interés que se van a mostrar.</p>
-          <p align="justify"> 3. Elegir el modo de transporte: andando o en coche.</p>
-          <p align="justify"> 4. Especificar los valores de corte, en minutos, que van a determinar las regiones accesibles.
-            <br/>(Los valores de corte se deben introducir separados de una coma o un espacio. Por ejemplo: 1, 5, 10 o bien 1 5 10).</p>
-        </fieldset>
-        <fieldset id="ubicacion">
-          <legend>Marcar la ubicación</legend>
-          Pulsa el botón y marca un punto en el mapa
-          <button class="btnseleccionPunto">Seleccionar punto</button>
-        </fieldset>
-        <fieldset id="seleccionSitiosInteres">
-          <legend>Seleccionar los Sitios de Interés</legend>
-          <p align="justify">Educación:</p>
-          <input type="checkbox" class="cajaCheck" id="subtipoSIEducacion1" value="1">
-          <button class="botonCheck" id="btn-colegiosPrimaria">Colegios de primaria</button>
-        </fieldset>
-        <fieldset id="ubicacion">
-          <legend>Definir los valores de corte</legend>
-          <input type="radio" class="radiobtn" name="valorCorte" id="minCoche" />Minutos en coche
-          <input type="radio" class="radiobtn" name="valorCorte" id="minAndando" />Minutos andando<br/>
-          <input type="number" name="minsCoche" min="0" max="15" value="1">
-          <input type="number" name="minsCoche" min="0" max="15" value="5">
-          <input type="number" name="minsCoche" min="0" max="15" value="10">
-          <input type="number" name="minsAndando" min="0" max="60" value="5">
-          <input type="number" name="minsAndando" min="0" max="60" value="10">
-          <input type="number" name="minsAndando" min="0" max="60" value="15">
-        </fieldset>
-      </div>
-      <div class="cntBtnEjecutar">
-        <button class="btnEjecutar" id="btnEjecutarGPSA">Ejecutar</button>
-      </div>
-    </div>
-    <div class="contMapa">
-      <div id="map"></div>
-    </div>
-    </body>
+  </div>
+  </body>
 
 </html>

@@ -1,0 +1,354 @@
+.menu {
+  position: absolute;
+  top: 50px;
+  right: 2px;
+  width: 400px;
+  height: 540px;
+  border-radius: 8px;
+  border: solid 2px;
+  border-color: #173e43;
+  background-color: #fae596;
+  color: #000;
+  z-index: 3;
+  display: none;
+}
+
+.cabeceraMenu {
+  position: relative;
+  padding: 3px;
+  padding-left: 10px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  font-size: 18px;
+  font-variant: small-caps;
+  font-weight: bold;
+  background-color: #173e43;
+  color: #fff;
+}
+
+.imgCerrarVentana {
+  height: 12px;
+  width: 12px;
+}
+
+.btnCerrarVentana {
+  width: 10px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border-color: transparent;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.contFiltros {
+  height: 470px;
+  overflow-y: scroll;
+}
+
+fieldset {
+  margin: 6px;
+  border-radius: 5px;
+  background-color: #fff;
+  font-variant: small-caps;
+}
+
+legend {
+  margin-left: 5px;
+  font-size: 18px;
+  font-variant: small-caps;
+  background-color: #dddfd4;
+  border-radius: 5px;
+  border-width: 2px;
+  border-style: groove;
+  border-color: threedface;
+  border-image: initial;
+}
+
+fieldset>fieldset>legend {
+  font-size: 15px;
+}
+
+fieldset>fieldset {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+.bloqueBotones {
+  text-align: center;
+  font-size: 16px;
+}
+
+.labelTransaccion {
+  margin: 2px 4px 2px 4px;
+  padding: 5px 35px 5px 35px;
+  border: solid;
+  border-width: thin;
+  border-radius: 3px;
+  border-color: #8b8989;
+  background-color: #fff;
+  color: #8b8989;
+  cursor: pointer;
+}
+
+.labelTransaccion:hover {
+  border-color: #173e43;
+  color: #141414;
+  background-color: #d6d6d6;
+}
+
+.labelTipoInmueble {
+  margin: 0px 2px 0px 2px;
+  padding: 1px 10px 1px 10px;
+  border: solid;
+  border-width: thin;
+  border-radius: 20px;
+  border-color: #8b8989;
+  background-color: #fff;
+  color: #8b8989;
+  cursor: pointer;
+}
+
+.labelTipoInmueble:hover {
+  border-color: #173e43;
+  color: #141414;
+  background-color: #d6d6d6;
+}
+
+.radiobtn {
+  display: none;
+}
+
+.cajaCheck {
+  display: none;
+}
+
+.botonCheck {
+  margin: 3px;
+  padding: 3px;
+  font-size: 14px;
+  border: solid;
+  border-width: thin;
+  border-radius: 5px;
+  border-color: #8b8989;
+  color: #8b8989;
+  background-color: #fff;
+  font-variant: small-caps;
+  text-align: justify;
+  cursor: pointer;
+}
+
+.botonCheck:hover {
+  border-radius: 5px;
+  border-color: #173e43;
+  color: #141414;
+  background-color: #d6d6d6;
+}
+
+.botonCheck2 {
+  margin: 3px;
+  padding: 3px;
+  font-size: 11px;
+  border: solid;
+  border-width: thin;
+  border-radius: 5px;
+  border-color: #8b8989;
+  color: #8b8989;
+  background-color: #fff;
+  font-variant: small-caps;
+  text-align: justify;
+  cursor: pointer;
+}
+
+.botonCheck2:hover {
+  border-radius: 5px;
+  border-color: #173e43;
+  color: #141414;
+  background-color: #d6d6d6;
+}
+
+.botonCheck3 {
+  margin-top: 5px;
+  margin-bottom: 1px;
+  width: 95%;
+  font-size: 14px;
+  border: solid;
+  border-width: thin;
+  border-radius: 5px;
+  border-color: #8b8989;
+  color: #8b8989;
+  background-color: #fff;
+  font-variant: small-caps;
+  text-align: center;
+  cursor: pointer;
+}
+
+.botonCheck3:hover {
+  border-radius: 5px;
+  border-color: #173e43;
+  color: #141414;
+  background-color: #d6d6d6;
+}
+
+select {
+  margin: 5px;
+  width: 95%;
+}
+
+.btn-group {
+  text-align: center;
+}
+
+.cntBtnEjecutar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 28px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+  padding-right: 20px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background-color: #173e43;
+}
+
+.btnEjecutar {
+  border-width: thin;
+  border-radius: 5px;
+  border-color: #fff;
+  background-color: transparent;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btnEjecutar:hover {
+  border-radius: 5px;
+  background-color: #fff;
+  color: #000;
+}
+
+.btnLimpiar {
+  display: none;
+  margin-left: 10px;
+  border-width: thin;
+  border-radius: 5px;
+  border-color: #fff;
+  background-color: transparent;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btnLimpiar:hover {
+  border-radius: 5px;
+  background-color: #fff;
+  color: #000;
+}
+
+.contParamsSA {
+  height: 470px;
+  overflow-y: scroll;
+}
+
+#explicacion {
+  font-size: 11px;
+  background-color: #fff;
+}
+
+.btnseleccionPunto {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  height: 35px;
+  background-color: #fff;
+  border-width: thin;
+  border-radius: 5px;
+  border-color: #8b8989;
+  color: #8b8989;
+  cursor: pointer;
+}
+
+.btnseleccionPunto:hover {
+  border-color: #173e43;
+  color: #141414;
+  background-color: #d6d6d6;
+}
+
+#bloqueEducacion {
+  display: none;
+}
+
+#bloqueComercio {
+  display: none;
+}
+
+#bloqueTransportes {
+  display: none;
+}
+
+#bloqueOcio {
+  display: none;
+}
+
+#bloqueSalud {
+  display: none;
+}
+
+#bloqueProteccion {
+  display: none;
+}
+
+#valoresAndando {
+  display: none;
+}
+
+#valoresCoche {
+  display: none;
+}
+
+.bloqueSitiosInteres {
+  text-align: center;
+}
+
+.bloqueBotones2 {
+  margin-top: 3px;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+#bloqueModoTransporte {
+  margin-top: 10px;
+}
+
+#bloqueValoresCorteAndando {
+  margin-top: 10px;
+}
+
+#bloqueValoresCorteCoche {
+  margin-top: 10px;
+}
+
+.inputValoresCorte {
+  width: 100px;
+  height: 25px;
+}
+
+.labelModoTransporte {
+  margin: 2px 4px 2px 4px;
+  padding: 5px 35px 5px 35px;
+  font-size: 15px;
+  border: solid;
+  border-width: thin;
+  border-radius: 3px;
+  border-color: #8b8989;
+  background-color: #fff;
+  color: #8b8989;
+  cursor: pointer;
+}
+
+.labelModoTransporte:hover {
+  border-color: #173e43;
+  color: #141414;
+  background-color: #d6d6d6;
+}

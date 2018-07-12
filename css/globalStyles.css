@@ -1,0 +1,258 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 97.9%;
+  width: 100%;
+}
+
+p {
+  margin: 0px;
+  margin-bottom: 2px;
+}
+
+h3 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+h4 {
+  display: inline;
+}
+
+.imgInfoTemp {
+  text-align: center;
+}
+
+.btnContacto {
+  text-align: center;
+}
+
+.btnCntact:hover {
+  cursor: pointer;
+}
+
+.contenedor {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 8% auto;
+  height: 97.9%;
+}
+
+.contTitulo {
+  grid-row: 1;
+  grid-column: 1/2;
+  display: grid;
+  grid-template-columns: 200px auto;
+  grid-template-rows: 100%;
+  background: linear-gradient(#3fb0ac, #173e43);
+}
+
+.contLogo {
+  grid-row: 1;
+  grid-column: 1;
+  padding-left: 15px;
+}
+
+.imgLogo {
+  width: 160px;
+  height: 42px;
+}
+
+.titulo {
+  grid-row: 1;
+  grid-column: 2/3;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 20px;
+  font-variant: small-caps;
+  font-weight: bold;
+  color: #f2f0f0;
+}
+
+.botonesIzq {
+  margin-left: 3px;
+  margin-bottom: 10px;
+  border: solid;
+  border-width: thin;
+  border-radius: 3px;
+  border-color: transparent;
+  background-color: transparent;
+  align-content: center;
+  cursor: pointer;
+}
+
+.botonesIzq:hover {
+  border-radius: 5px;
+  border-color: #141414;
+  background-color: rgba(214, 214, 214, 0.5);
+}
+
+.botonesIzq:active {
+  border-radius: 10px;
+  border-color: #141414;
+  background-color: rgba(#505050, 0.5);
+}
+
+.imgIconos {
+  height: 25px;
+  width: 25px;
+}
+
+#btnConsultas {
+  position: absolute;
+  margin-top: 95px;
+  margin-left: 12px;
+  background-color: rgba(27, 75, 79, 0.55);
+  z-index: 2;
+}
+
+#btnServiceAreas {
+  position: absolute;
+  margin-top: 130px;
+  margin-left: 12px;
+  background-color: rgba(27, 75, 79, 0.55);
+  z-index: 2;
+}
+
+#btnHipotecas {
+  position: absolute;
+  margin-top: 165px;
+  margin-left: 12px;
+  background-color: rgba(27, 75, 79, 0.55);
+  z-index: 2;
+}
+
+#btnEstadisticas {
+  position: absolute;
+  margin-top: 200px;
+  margin-left: 12px;
+  background-color: rgba(27, 75, 79, 0.55);
+  z-index: 2;
+}
+
+.contMapa {
+  position: relative;
+  grid-row: 2;
+  grid-column: 1/2;
+}
+
+#map {
+  height: 98.4%;
+}
+
+.esriSimpleSliderTL {
+  top: 14px;
+  left: 15px;
+}
+
+.esriSimpleSlider div {
+  height: 35px;
+}
+
+#search {
+  position: absolute;
+  padding: 0px;
+  margin-top: 15px;
+  margin-left: 55px;
+  font-variant: small-caps;
+  z-index: 2;
+}
+
+.arcgisSearch .hasMultipleSources .searchInput {
+  font-variant: small-caps;
+}
+
+#btnHome {
+  position: absolute;
+  margin-top: 55px;
+  margin-left: 55px;
+  z-index: 1;
+}
+
+.HomeButton .home {
+  background-color: rgba(27, 75, 79, 0.55);
+}
+
+#btnLocate {
+  position: absolute;
+  margin-top: 55px;
+  margin-left: 90px;
+  z-index: 1;
+}
+
+.LocateButton .zoomLocateButton {
+  background-color: rgba(27, 75, 79, 0.55);
+}
+
+#bmToggle {
+  position: absolute;
+  bottom: 45px;
+  right: 15px;
+  z-index: 2;
+}
+
+.BasemapToggle .basemapImage {
+  width: 40px;
+  height: 40px;
+}
+
+.BasemapToggle .basemapTitle {
+  width: 100%;
+  font-size: 7.5px;
+  line-height: 6px;
+}
+
+.BasemapToggle .basemapImage .basemapBG {
+  width: 40px;
+  height: 40px;
+}
+
+.esriLayerList .esriTitle {
+  font-size: 12px;
+}
+
+.esriLayerList .esriContainer {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+.esriLayerList .esriToggleButton {
+  padding-right: 15px;
+  padding-top: 9px;
+}
+
+.contLegend {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 200px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  height: auto;
+  font-variant: small-caps;
+  z-index: 2;
+  background-color: #f8f8f8;
+}
+
+.tituloLegend {
+  padding: 1px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  border-bottom: solid 1px #9e9e9ebf;
+}
+
+#contInmuebles {
+  padding: 10px;
+}
+
+#contSitiosInteres {
+  padding: 10px;
+  display: none;
+}
+
+.esriLegendServiceLabel {
+  font-size: 12px;
+}
